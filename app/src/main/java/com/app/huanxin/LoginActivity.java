@@ -47,9 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                 EMClient.getInstance().login(userName, passWord, new EMCallBack() {//回调
                     @Override
                     public void onSuccess() {
-//                EMClient.getInstance().groupManager().loadAllGroups();
-//                EMClient.getInstance().chatManager().loadAllConversations();
-                        Log.d("main", "登录聊天服务器成功！");
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     }
 
                     @Override
