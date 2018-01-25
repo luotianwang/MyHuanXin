@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.app.huanxin.util.HXHelper;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
@@ -49,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
                     try {
                         EMClient.getInstance().createAccount(userName, passWord);//同步方法
                         Log.e("LMC", "注册成功");
+                        HXHelper.getInstance().setCurrentUserName(userName);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

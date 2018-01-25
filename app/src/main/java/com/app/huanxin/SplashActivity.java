@@ -1,9 +1,12 @@
 package com.app.huanxin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 
+import com.app.huanxin.util.HXHelper;
 import com.hyphenate.chat.EMClient;
 
 /**
@@ -16,5 +19,11 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EMClient.getInstance().groupManager().loadAllGroups();
         EMClient.getInstance().chatManager().loadAllConversations();
+        String username = HXHelper.getInstance().getCurrentUsernName();
+        if (!TextUtils.isEmpty(username)) {
+            startActivity(new Intent(this, HomeActivity.class));
+        } else {
+            startActivity(new Intent(this, LoginActivity.class));
+        }
     }
 }

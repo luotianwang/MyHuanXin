@@ -28,6 +28,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation project(':easeui')
+    compile 'com.parse:parse-android:1.13.1'
+    compile 'com.android.support:multidex:1.0.1'
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }

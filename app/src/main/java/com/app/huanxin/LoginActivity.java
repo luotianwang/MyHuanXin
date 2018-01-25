@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.app.huanxin.util.HXHelper;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 
@@ -42,12 +44,20 @@ public class LoginActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
-                String userName = edtUsername.getText().toString();
+                final String userName = edtUsername.getText().toString();
                 String passWord = edtPassword.getText().toString();
                 EMClient.getInstance().login(userName, passWord, new EMCallBack() {//回调
                     @Override
                     public void onSuccess() {
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                HXHelper.getInstance().setCurrentUserName(userName);
+                                Toast.makeText(getApplicationContext(), "登录聊天服务器成功", Toast.LENGTH_LONG).show();
+                            }
+                        });
+
                     }
 
                     @Override
@@ -58,7 +68,15 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onError(int code, String message) {
                         Log.d("main", "登录聊天服务器失败！");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "登录聊天服务器失败", Toast.LENGTH_LONG).show();
+                            }
+                        });
+
                     }
+
                 });
                 break;
             case R.id.btn_register:
