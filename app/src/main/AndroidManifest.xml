@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".HomeActivity"></activity>
         <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"></activity>
         <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"></activity>
         <!-- 设置环信应用的AppKey -->

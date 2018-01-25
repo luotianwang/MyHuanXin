@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
                             }
                         });
                     } catch (final HyphenateException e) {

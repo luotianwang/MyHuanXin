@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                 EMClient.getInstance().login(userName, passWord, new EMCallBack() {//回调
                     @Override
                     public void onSuccess() {
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                     }
 
                     @Override
