@@ -13,12 +13,15 @@ import com.hyphenate.easeui.ui.EaseChatFragment;
 
 public class ChatActivity extends EaseBaseActivity {
 
+    public static String toUserName = "";
+
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_chat);
 
         String userName = getIntent().getStringExtra(Constant.EXTRA_USER_ID);
+        toUserName = userName;
         //new出EaseChatFragment或其子类的实例
         EaseChatFragment chatFragment = new EaseChatFragment();
         //传入参数
@@ -29,4 +32,5 @@ public class ChatActivity extends EaseBaseActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.layout_content, chatFragment).commit();
 
     }
+
 }

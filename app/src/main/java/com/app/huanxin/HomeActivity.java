@@ -67,16 +67,48 @@ public class HomeActivity extends EaseBaseActivity implements View.OnClickListen
      * 监听消息状态
      */
     EMMessageListener msgListener = new EMMessageListener() {
+        //收到消息
         @Override
-        public void onMessageReceived(List<EMMessage> list) {
-            Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_LONG).show();
+        public void onMessageReceived(List<EMMessage> messages) {
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getApplicationContext(), "收到消息", Toast.LENGTH_LONG).show();
+                }
+            });
+
+
+            for (EMMessage message : messages) {
+                String username = null;
+                // 群组消息
+                if (message.getChatType() == EMMessage.ChatType.GroupChat || message.getChatType() == EMMessage.ChatType.ChatRoom) {
+                    username = message.getTo();
+                } else {
+                    // 单聊消息
+                    username = message.getFrom();
+                }
+                // 如果是当前会话的消息，刷新聊天页面
+                if (username.equals(ChatActivity.)) {
+                    msgList.addAll(messages);
+                    adapter.notifyDataSetChanged();
+                    if (msgList.size() > 0) {
+                        et_content.setSelection(listView.getCount() - 1);
+
+                    }
+
+                }
+            }
+
         }
 
+        //收到透传消息
         @Override
         public void onCmdMessageReceived(List<EMMessage> list) {
             Toast.makeText(getApplicationContext(), "2", Toast.LENGTH_LONG).show();
         }
 
+        //收到已读回执
         @Override
         public void onMessageRead(List<EMMessage> list) {
             Toast.makeText(getApplicationContext(), "3", Toast.LENGTH_LONG).show();
@@ -126,7 +158,6 @@ public class HomeActivity extends EaseBaseActivity implements View.OnClickListen
             msg.setFrom(username);
             msg.setTime(System.currentTimeMillis());
             msg.setReason(reason);
-
             // 设置相应status
             msg.setStatus(InviteMessage.InviteMessageStatus.BEINVITEED);
             notifyNewIviteMessage(msg);
