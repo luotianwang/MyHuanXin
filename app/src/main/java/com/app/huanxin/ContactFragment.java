@@ -15,6 +15,7 @@ import com.hyphenate.easeui.ui.EaseContactListFragment;
 
 public class ContactFragment extends EaseContactListFragment {
 
+    
     @SuppressLint("InflateParams")
     @Override
     protected void initView() {
