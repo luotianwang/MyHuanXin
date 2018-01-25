@@ -88,16 +88,15 @@ public class HomeActivity extends EaseBaseActivity implements View.OnClickListen
                     // 单聊消息
                     username = message.getFrom();
                 }
-                // 如果是当前会话的消息，刷新聊天页面
-                if (username.equals(ChatActivity.)) {
-                    msgList.addAll(messages);
-                    adapter.notifyDataSetChanged();
-                    if (msgList.size() > 0) {
-                        et_content.setSelection(listView.getCount() - 1);
-
-                    }
-
-                }
+//                // 如果是当前会话的消息，刷新聊天页面
+//                if (username.equals(ChatActivity.)) {
+//                    msgList.addAll(messages);
+//                    adapter.notifyDataSetChanged();
+//                    if (msgList.size() > 0) {
+//                        et_content.setSelection(listView.getCount() - 1);
+//
+//                    }
+//                }
             }
 
         }
