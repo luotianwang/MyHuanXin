@@ -53,11 +53,8 @@ public class HomeActivity extends EaseBaseActivity implements View.OnClickListen
         setContentView(R.layout.activity_main);
         requestPermissions();
         initview();
-
         initDate();
-        contactFragment = new ContactFragment();
         conversationFragment = new ConversationFragment();
-
         changeFragement(getSupportFragmentManager().beginTransaction(), conversationFragment);
     }
 
@@ -189,7 +186,6 @@ public class HomeActivity extends EaseBaseActivity implements View.OnClickListen
         //收到好友邀请
         @Override
         public void onContactInvited(final String username, String reason) {
-
             List<InviteMessage> msgs = inviteMessgeDao.getMessagesList();
             for (InviteMessage inviteMessage : msgs) {
                 if (inviteMessage.getGroupId() == null && inviteMessage.getFrom().equals(username)) {
@@ -231,18 +227,10 @@ public class HomeActivity extends EaseBaseActivity implements View.OnClickListen
 
                 @Override
                 public void run() {
-                    Toast.makeText(getApplicationContext(), "好友申请同意：+" + username, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "好友同意申请：+" + username, Toast.LENGTH_SHORT).show();
                 }
 
 
-            });
-
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(getApplicationContext(), "好友请求被同意", Toast.LENGTH_LONG).show();
-                }
             });
         }
 
@@ -332,6 +320,9 @@ public class HomeActivity extends EaseBaseActivity implements View.OnClickListen
         switch (v.getId()) {
 
             case R.id.tv_liaotian:
+                if (conversationFragment == null) {
+                    conversationFragment = new ConversationFragment();
+                }
                 conversationFragment.setConversationListItemClickListener(new EaseConversationListFragment.EaseConversationListItemClickListener() {
                     @Override
                     public void onListItemClicked(EMConversation conversation) {
@@ -341,6 +332,9 @@ public class HomeActivity extends EaseBaseActivity implements View.OnClickListen
                 changeFragement(transaction, conversationFragment);
                 break;
             case R.id.tv_lianxiren:
+                if (contactFragment == null) {
+                    contactFragment = new ContactFragment();
+                }
                 //需要设置联系人列表才能启动fragment
                 contactFragment.setContactsMap(DemoDBManager.getInstance().getContactList());
                 //设置item点击事件
@@ -364,12 +358,10 @@ public class HomeActivity extends EaseBaseActivity implements View.OnClickListen
         PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
             @Override
             public void onGranted() {
-//				Toast.makeText(MainActivity.this, "All permissions have been granted", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onDenied(String permission) {
-                //Toast.makeText(MainActivity.this, "Permission " + permission + " has been denied", Toast.LENGTH_SHORT).show();
             }
         });
     }
