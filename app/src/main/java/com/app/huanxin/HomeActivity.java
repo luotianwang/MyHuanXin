@@ -1,7 +1,9 @@
 package com.app.huanxin;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.Toast;
 
 import com.app.huanxin.db.InviteMessgeDao;
 import com.app.huanxin.domain.InviteMessage;
+import com.app.huanxin.runtimepermissions.PermissionsManager;
+import com.app.huanxin.runtimepermissions.PermissionsResultAction;
 import com.app.huanxin.util.HXHelper;
 import com.hyphenate.EMContactListener;
 import com.hyphenate.EMMessageListener;
@@ -35,6 +39,7 @@ public class HomeActivity extends EaseBaseActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        requestPermissions();
         initview();
         changeFragement(getSupportFragmentManager().beginTransaction(), new ConversationFragment());
     }
@@ -77,7 +82,6 @@ public class HomeActivity extends EaseBaseActivity implements View.OnClickListen
                     Toast.makeText(getApplicationContext(), "收到消息", Toast.LENGTH_LONG).show();
                 }
             });
-
 
             for (EMMessage message : messages) {
                 String username = null;
@@ -271,5 +275,26 @@ public class HomeActivity extends EaseBaseActivity implements View.OnClickListen
                 changeFragement(transaction, contactListFragment);
                 break;
         }
+    }
+
+    @TargetApi(23)
+    private void requestPermissions() {
+        PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
+            @Override
+            public void onGranted() {
+//				Toast.makeText(MainActivity.this, "All permissions have been granted", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDenied(String permission) {
+                //Toast.makeText(MainActivity.this, "Permission " + permission + " has been denied", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
     }
 }
