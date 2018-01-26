@@ -2,8 +2,10 @@ package com.app.huanxin;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.app.huanxin.util.HXHelper;
 import com.app.huanxin.widget.ContactItemView;
@@ -14,7 +16,13 @@ import com.hyphenate.easeui.ui.EaseContactListFragment;
  */
 
 public class ContactFragment extends EaseContactListFragment {
-    
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
     @SuppressLint("InflateParams")
     @Override
     protected void initView() {

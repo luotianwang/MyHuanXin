@@ -1,7 +1,10 @@
 package com.app.huanxin;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +22,11 @@ import com.hyphenate.util.NetUtils;
 
 public class ConversationFragment extends EaseConversationListFragment {
     TextView errorText;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
     @Override
     protected void initView() {

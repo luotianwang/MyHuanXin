@@ -5,10 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
+import com.app.huanxin.MyApplication;
 import com.app.huanxin.domain.InviteMessage;
 import com.app.huanxin.domain.RobotUser;
 import com.app.huanxin.util.Constant;
-import com.app.huanxin.util.DemoApplication;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.HanziToPinyin;
@@ -31,7 +31,7 @@ public class DemoDBManager {
      * 初始化数据库
      */
     private DemoDBManager() {
-        dbHelper = DbOpenHelper.getInstance(DemoApplication.getInstance().getApplicationContext());
+        dbHelper = DbOpenHelper.getInstance(MyApplication.getInstance().getApplicationContext());
     }
 
     /**

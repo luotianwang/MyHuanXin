@@ -34,7 +34,6 @@ public class NewFriendsMsgActivity extends EaseBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.em_activity_new_friends_msg);
-
         ListView listView = (ListView) findViewById(R.id.list);
         InviteMessgeDao dao = new InviteMessgeDao(this);
         List<InviteMessage> msgs = dao.getMessagesList();

@@ -60,20 +60,16 @@ public class AddContactActivity extends EaseBaseActivity {
     public void searchContact(View v) {
         final String name = editText.getText().toString();
         String saveText = searchBtn.getText().toString();
-
+        nameText.setText(name);
         if (getString(R.string.button_search).equals(saveText)) {
             toAddUsername = name;
             if (TextUtils.isEmpty(name)) {
                 new EaseAlertDialog(this, R.string.Please_enter_a_username).show();
                 return;
             }
-
             // TODO you can search the user from your app server here.
-
             //show the userame and add button if user exist
             searchedUserLayout.setVisibility(View.VISIBLE);
-            nameText.setText(toAddUsername);
-
         }
     }
 
@@ -106,7 +102,6 @@ public class AddContactActivity extends EaseBaseActivity {
 
         new Thread(new Runnable() {
             public void run() {
-
                 try {
                     //demo use a hardcode reason here, you need let user to input if you like
                     String s = getResources().getString(R.string.Add_a_friend);
